@@ -44,3 +44,5 @@
 - What has happened?
     - This happened because the original shell `/bin/bash` has default protection mechanism by which it automatically drops it's privileges when invoked.
     - Therefore, even if we can “fool” a privileged Set-UID program to invoke a shell, we are not able to retain the privileges within the shell.
+- My Exploit Attempt
+    - prepending the `\x6a\x17\x58\x31\xdb\xcd\x80` machine code to the given shellcode will force the `sh` to not to drop its previleges and hence when its invoked it will have `root` access.
