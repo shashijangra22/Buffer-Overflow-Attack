@@ -15,12 +15,18 @@
 ## Steps to see the working of overflow attack
 - Steps as root user
     - `sudo sysctl -w kernel.randomize_va_space=0`
+        - to disable to ASLR (so that the executable's stack has same address in memory each time it runs)
     - `sudo gcc vuln.c -o vuln -fno-stack-protector -z execstack`
+        - to turn off the stack protection and enabling making the stack executable
     - `sudo chmod 4755 vuln`
+        - so that every user can execute this file
 - Steps as non-root user
     - `gcc exploit.c -o exp`
+        - compiling the `exploit.c` file
     - `./exp`
+        - writing malicious code in `malfile`
     - .`/vuln`
+        - running the `vuln` file to get the root access
     - Expected outcome is a root shell is spawned which the non-root user can check by the `#` sign or typing the command `whoami` to get the username as `root`
 
 ## [Part-1] Approach to Solve the problem
